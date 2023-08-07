@@ -1,7 +1,8 @@
 import  { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import app from '../firebase/firebase.config';
+
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import app from '../../firebase/firebase.config';
 
 export const AuthContext = createContext(null);
 
@@ -17,11 +18,11 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         fetch('https://food-network-server-toma570.vercel.app/recipes')
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => setChefAllData(data))
             .catch(error => console.error(error))
     }, [])
 
-   // setChefAllData
+   //console.log(chefAllData)
 
     const createUser = (email, password) => {
         setLoading(true);

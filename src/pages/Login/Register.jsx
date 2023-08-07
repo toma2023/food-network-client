@@ -1,16 +1,16 @@
 
-import { Form, Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 
 const Register = () => {
-    // const { createUser, updateUser } = useContext(AuthContext);
-    // const [error, setError] = useState('');
-    // const navigate = useNavigate()
-    // const location = useLocation()
-    // const from = location?.state?.from?.pathname || '/'
-
-
+    const { createUser, updateUser } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
 
     const handleRegister = event => {
         event.preventDefault();
@@ -22,23 +22,23 @@ const Register = () => {
         const password = form.password.value;
        
 
-        // setError('')
-        // if (password !== confirm) {
-        //     setError('Your password did not match')
-        //     return;
-        // }
-        // else if (password.length < 6) {
-        //     setError('Password must be 6 characters or longer')
-        //     return;
-        // }
+        setError('')
+        if (password !== confirm) {
+            setError('Your password did not match')
+            return;
+        }
+        else if (password.length < 6) {
+            setError('Password must be 6 characters or longer')
+            return;
+        }
 
-        // createUser(email, password)
-        //     .then(res => {
-        //         updateUser(name, photo)
-        //             .then(res => navigate(`${from}`), form.reset())
-        //             .catch(error => setError(error.message));
-        //     })
-        //     .catch(error => setError(error.message)); 
+        createUser(email, password)
+            .then(res => {
+                updateUser(name, photo)
+                    .then(res => navigate(`${from}`), form.reset())
+                    .catch(error => setError(error.message));
+            })
+            .catch(error => setError(error.message)); 
     }
 
 
@@ -48,7 +48,7 @@ const Register = () => {
                     <div className="text-center lg:text-left">
                         <img src="https://i.ibb.co/sqRhNy3/Whats-App-Image-2023-08-07-at-8-40-47-PM-removebg-preview.png" alt="" />
                     </div>
-                    <div className="card text-white flex-shrink-0 w-full max-w-sm shadow-2xl bg-gray-900">
+                    <div className="card  flex-shrink-0 w-full max-w-sm shadow-2xl bg-gray-900">
                     <h2 className='text-purple-600  mt-8 text-center text-5xl font-bold'>Register Now</h2>
                     <Form onSubmit={handleRegister} className="card-body">
                         <div className="form-control">
@@ -67,27 +67,27 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text text-white">Email</span>
                             </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                            <input type="email" name='email' placeholder="email" className="input input-bordered text-black" required />
                         </div>
 
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-white">Password</span>
                             </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered text-black" required />
 
                             <label className="label">
                                 <span className="label-text text-white">Confirm Password</span>
                             </label>
-                            <input type="password" name='confirm' placeholder="confirm password" className="input input-bordered" required />
+                            <input type="password" name='confirm' placeholder="confirm password" className="input input-bordered text-black" required />
                            
-                            <p><small className='text-red-600'>{""}</small></p>  
+                            <p><small className='text-red-600'>{error}</small></p>  
                         </div>
                         <div className="form-control mt-6">
                             <button className="bg-purple-600 py-2 rounded-md ">Register</button>
                         </div>
-                        <p>Already have an account? <Link to="/login"><span className='text-purple-600  underline'>Login</span></Link> </p>
-                        <p className='text-error'>{""}</p>
+                        <p className='text-white'>Already have an account? <Link to="/login"><span className='text-purple-600  underline'>Login</span></Link> </p>
+                        <p className='text-error'>{error}</p>
                     </Form>
                 </div>
 

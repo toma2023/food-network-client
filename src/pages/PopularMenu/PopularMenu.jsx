@@ -4,9 +4,9 @@ import { FaCheck } from 'react-icons/fa';
 const PopularMenu = () => {
     return (
         <div className='text-white p-7'>
-            <div className=' my-20'>
-                <h1 className='text-6xl font-bold text-center mb-16'>Popular Menu</h1>
-                <div className='md:max-w-full mx-auto'>
+          
+                <h1 className='text-6xl font-bold text-center mb-16 '>Popular Menu</h1>
+                <div className='md:max-w-full mx-auto '>
 
                     <div className="grid md:grid-cols-2 gap-6 space-x-5 mb-16">
                         <div className="card  bg-base-80 shadow-xl image-full">
@@ -47,7 +47,7 @@ const PopularMenu = () => {
                 </div>
 
             </div>
-        </div>
+        
     );
 };
 
